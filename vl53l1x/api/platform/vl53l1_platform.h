@@ -64,7 +64,7 @@
 #ifndef _VL53L1_PLATFORM_H_
 #define _VL53L1_PLATFORM_H_
 
-#include "vl53l1_ll_def.h"
+#include "../core/vl53l1_ll_def.h"
 #include "vl53l1_platform_log.h"
 
 #define VL53L1_IPP_API
