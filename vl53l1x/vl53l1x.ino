@@ -1,4 +1,4 @@
-#include "ULDAPI/core/VL53L1X_api.c"
+#include "ULDAPI/core/vl53l1_api.c"
 #include "ULDAPI/platform/vl53l1_platform.c"
 #include "params.h"
 #include <i2c_t3.h>
