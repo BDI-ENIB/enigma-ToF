@@ -6,6 +6,6 @@
 // 0x52 >> 1 = 0x29
 #define TOF_DEFAULT_ADDRESS 0x29
 
-#define TOF_GPIO_ADDRESS 0
+#define TOF_ADDRESS_1 0x30
 
 #endif

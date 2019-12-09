@@ -16,22 +16,24 @@ void setup() {
 	}
 	Serial.println("Initializing sensor");
 	VL53L1X_SensorInit(TOF_DEFAULT_ADDRESS);
+	Serial.println("Changing address");
+	VL53L1X_SetI2CAddress(TOF_DEFAULT_ADDRESS, TOF_ADDRESS_1 << 1);
 	Serial.println("Starting ranging");
-	VL53L1X_StartRanging(TOF_DEFAULT_ADDRESS);
+	VL53L1X_StartRanging(TOF_ADDRESS_1);
 }
 
 void loop() {
 	uint8_t data_ready = false;
 	while (!data_ready) {
-		VL53L1X_CheckForDataReady(TOF_DEFAULT_ADDRESS, &data_ready);
+		VL53L1X_CheckForDataReady(TOF_ADDRESS_1, &data_ready);
 		delay(2);
 	}
 
 	uint8_t status;
 	uint16_t distance;
-	VL53L1X_GetRangeStatus(TOF_DEFAULT_ADDRESS, &status);
-	VL53L1X_GetDistance(TOF_DEFAULT_ADDRESS, &distance);
-	VL53L1X_ClearInterrupt(TOF_DEFAULT_ADDRESS);
+	VL53L1X_GetRangeStatus(TOF_ADDRESS_1, &status);
+	VL53L1X_GetDistance(TOF_ADDRESS_1, &distance);
+	VL53L1X_ClearInterrupt(TOF_ADDRESS_1);
 
 	Serial.print(status);
 	Serial.print(',');
