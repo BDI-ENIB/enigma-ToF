@@ -7,6 +7,8 @@
 #define _VL53L1_PLATFORM_H_
 
 #include "vl53l1_types.h"
+#include "../../params.h"
+#include <i2c_t3.h>
 
 #ifdef __cplusplus
 extern "C"

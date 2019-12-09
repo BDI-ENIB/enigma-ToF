@@ -39,37 +39,99 @@
 #include <math.h>
 
 int8_t VL53L1_WriteMulti(uint16_t dev, uint16_t index, uint8_t *pdata, uint32_t count) {
-	return 0; // to be implemented
+	TOF_I2C.beginTransmission(dev);
+	TOF_I2C.write(index>>8);
+	TOF_I2C.write(index&0xFF);
+
+	TOF_I2C.write(pdata, count);
+
+	TOF_I2C.endTransmission();
+
+	return 0;
 }
 
 int8_t VL53L1_ReadMulti(uint16_t dev, uint16_t index, uint8_t *pdata, uint32_t count){
-	return 0; // to be implemented
+	TOF_I2C.beginTransmission(dev);
+	TOF_I2C.write(index>>8);
+	TOF_I2C.write(index&0xFF);
+	TOF_I2C.endTransmission();
+
+	TOF_I2C.requestFrom(dev, count);
+	while(uint32_t(TOF_I2C.available()) < count) {}
+	TOF_I2C.read(pdata, count);
+
+	return 0;
 }
 
 int8_t VL53L1_WrByte(uint16_t dev, uint16_t index, uint8_t data) {
-	return 0; // to be implemented
+	TOF_I2C.beginTransmission(dev);
+	TOF_I2C.write(index>>8);
+	TOF_I2C.write(index&0xFF);
+
+	TOF_I2C.write(data);
+
+	TOF_I2C.endTransmission();
+
+	return 0;
 }
 
 int8_t VL53L1_WrWord(uint16_t dev, uint16_t index, uint16_t data) {
-	return 0; // to be implemented
+	uint8_t pdata[2];
+	pdata[0] = data >> 8;
+	pdata[1] = data & 0xFF;
+	return VL53L1_WriteMulti(dev, index, pdata, 2);
 }
 
 int8_t VL53L1_WrDWord(uint16_t dev, uint16_t index, uint32_t data) {
-	return 0; // to be implemented
+	uint8_t pdata[4];
+	for (int i = 0; i > 4;i++)
+	{
+		pdata[i] = (data >> (24 - (i * 8))) & 0xFF;
+	}
+	return VL53L1_WriteMulti(dev, index, pdata, 2);
 }
 
 int8_t VL53L1_RdByte(uint16_t dev, uint16_t index, uint8_t *data) {
-	return 0; // to be implemented
+	TOF_I2C.beginTransmission(dev);
+	TOF_I2C.write(index>>8);
+	TOF_I2C.write(index&0xFF);
+	int8_t status = TOF_I2C.endTransmission(I2C_STOP, 1000*2000);
+
+	if (status)
+	{
+		return status;
+	}
+
+	TOF_I2C.requestFrom(dev, 1);
+	while(TOF_I2C.available() < 1) {}
+	*data = TOF_I2C.read();
+
+	return 0;
 }
 
 int8_t VL53L1_RdWord(uint16_t dev, uint16_t index, uint16_t *data) {
-	return 0; // to be implemented
+	uint8_t pdata[2] {0};
+	int8_t status = VL53L1_ReadMulti(dev, index, pdata, 2);
+
+	*data = uint16_t(pdata[0] << 8) + pdata[1];
+
+	return status;
 }
 
 int8_t VL53L1_RdDWord(uint16_t dev, uint16_t index, uint32_t *data) {
-	return 0; // to be implemented
+	uint8_t pdata[4] {0};
+	int8_t status = VL53L1_ReadMulti(dev, index, pdata, 4);
+
+	*data = 0;
+
+	for (int i = 0; i < 4; ++i)
+	{
+		*data += uint32_t(pdata[i]) << (24 - (i * 8));
+	}
+
+	return status;
 }
 
 int8_t VL53L1_WaitMs(uint16_t dev, int32_t wait_ms){
-	return 0; // to be implemented
+	return 0; // not called once, why would I implement it ?
 }
