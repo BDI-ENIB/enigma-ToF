@@ -1,42 +1,32 @@
 #include "ULDAPI/core/vl53l1_api.c"
 #include "ULDAPI/platform/vl53l1_platform.c"
 #include "params.h"
+#include "tof.h"
 #include <i2c_t3.h>
+
+Tof* tof1 = nullptr;
 
 void setup() {
 	pinMode(13, OUTPUT);
 
 	Serial.println("Start I2C");
 	TOF_I2C.begin();
-	Serial.println("Checking BootState");
-	uint8_t boot_state = false, status = 0;
-	while (!boot_state && !status) {
-		status = VL53L1X_BootState(TOF_DEFAULT_ADDRESS, &boot_state);
-		delay(2);
-	}
+	
 	Serial.println("Initializing sensor");
-	VL53L1X_SensorInit(TOF_DEFAULT_ADDRESS);
-	Serial.println("Changing address");
-	VL53L1X_SetI2CAddress(TOF_DEFAULT_ADDRESS, TOF_ADDRESS_1 << 1);
+	tof1 = new Tof(33, 0, TOF_ADDRESS_1);
+
 	Serial.println("Starting ranging");
-	VL53L1X_StartRanging(TOF_ADDRESS_1);
+	tof1->begin();
 }
 
 void loop() {
-	uint8_t data_ready = false;
-	while (!data_ready) {
-		VL53L1X_CheckForDataReady(TOF_ADDRESS_1, &data_ready);
-		delay(2);
-	}
+	static uint8_t status1 = 0
+	status1 = tof1->try_refresh_distance();
 
-	uint8_t status;
-	uint16_t distance;
-	VL53L1X_GetRangeStatus(TOF_ADDRESS_1, &status);
-	VL53L1X_GetDistance(TOF_ADDRESS_1, &distance);
-	VL53L1X_ClearInterrupt(TOF_ADDRESS_1);
-
-	Serial.print(status);
+	Serial.print(status1);
 	Serial.print(',');
-	Serial.println(distance);
+	Serial.println(tof1->get_distance());
+
+
 	delay(1000);
 }
