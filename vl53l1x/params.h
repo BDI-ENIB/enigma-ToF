@@ -7,5 +7,6 @@
 #define TOF_DEFAULT_ADDRESS 0x29
 
 #define TOF_ADDRESS_1 0x30
+#define TOF_ADDRESS_2 0x31
 
 #endif
