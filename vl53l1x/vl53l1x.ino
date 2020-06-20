@@ -23,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-	static uint8_t status1 = 0
+	static uint8_t status1 = 0;
 	static uint8_t status2 = 0;
 	status1 = tof1->try_refresh_distance();
 	status2 = tof2->try_refresh_distance();
