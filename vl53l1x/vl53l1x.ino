@@ -9,6 +9,11 @@ Tof* tof2 = nullptr;
 
 void setup() {
 	pinMode(13, OUTPUT);
+	Serial.begin(9600);
+}
+
+void my_setup() {
+	delay(1000);
 
 	Serial.println("Start I2C");
 	TOF_I2C.begin();
@@ -23,6 +28,13 @@ void setup() {
 }
 
 void loop() {
+	static bool not_ran = true;
+	if (not_ran) {
+		my_setup();
+
+		not_ran = false;
+	}
+	
 	static uint8_t status1 = 0;
 	static uint8_t status2 = 0;
 	status1 = tof1->try_refresh_distance();
