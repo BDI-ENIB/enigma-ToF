@@ -23,7 +23,7 @@ void Tof::init_sensor() {
 
 	// Check boot state
 	uint8_t boot_state = false, status = 0;
-	while (!boot_state && !status) {
+	while (!boot_state || status) {
 		status = VL53L1X_BootState(TOF_DEFAULT_ADDRESS, &boot_state);
 		delay(2);
 	}
