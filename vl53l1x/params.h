@@ -1,6 +1,8 @@
 #ifndef TOF_PARAMS
 #define TOF_PARAMS 1
 
+#include <i2c_t3.h>
+
 #define TOF_I2C Wire1
 
 // 0x52 >> 1 = 0x29
