@@ -13,6 +13,7 @@ void setup() {
 }
 
 void my_setup() {
+	// Wait for serial monitor to be ready
 	delay(1000);
 
 	Serial.println("Start I2C");
