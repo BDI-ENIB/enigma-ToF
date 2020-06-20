@@ -3,6 +3,8 @@
 
 #include <i2c_t3.h>
 
+#define SERIAL_DEBUG 1
+
 #define TOF_I2C Wire1
 
 // 0x52 >> 1 = 0x29

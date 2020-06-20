@@ -16,14 +16,20 @@ void my_setup() {
 	// Wait for serial monitor to be ready
 	delay(1000);
 
-	Serial.println("Start I2C");
+	#if SERIAL_DEBUG
+		Serial.println("Start I2C");
+	#endif
 	TOF_I2C.begin();
-	
-	Serial.println("Initializing sensor");
+
+	#if SERIAL_DEBUG
+		Serial.println("Initializing sensor");
+	#endif
 	tof1 = new Tof(33, 0, TOF_ADDRESS_1);
 	tof2 = new Tof(34, 0, TOF_ADDRESS_2);
 
-	Serial.println("Starting ranging");
+	#if SERIAL_DEBUG
+		Serial.println("Starting ranging");
+	#endif
 	tof1->begin();
 	tof2->begin();
 }
