@@ -55,7 +55,6 @@ uint8_t Tof::try_refresh_distance() {
 
 	VL53L1X_CheckForDataReady(address, &data_ready);
 	if (data_ready) {
-		digitalWrite(13, HIGH);
 		VL53L1X_GetRangeStatus(address, &status);
 		VL53L1X_GetDistance(address, &distance);
 		VL53L1X_ClearInterrupt(address);
