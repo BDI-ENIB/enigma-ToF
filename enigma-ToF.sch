@@ -16,12 +16,12 @@ $EndDescr
 $Comp
 L power:GND #PWR0101
 U 1 1 5DDC1513
-P 1850 1100
-F 0 "#PWR0101" H 1850 850 50  0001 C CNN
-F 1 "GND" H 1855 927 50  0000 C CNN
-F 2 "" H 1850 1100 50  0001 C CNN
-F 3 "" H 1850 1100 50  0001 C CNN
-	1    1850 1100
+P 1900 950
+F 0 "#PWR0101" H 1900 700 50  0001 C CNN
+F 1 "GND" H 1905 777 50  0000 C CNN
+F 2 "" H 1900 950 50  0001 C CNN
+F 3 "" H 1900 950 50  0001 C CNN
+	1    1900 950 
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -573,8 +573,6 @@ Wire Wire Line
 Wire Wire Line
 	4750 2150 4750 1200
 Wire Wire Line
-	4750 1200 5100 1200
-Wire Wire Line
 	6450 1200 6800 1200
 Wire Wire Line
 	3100 2850 3300 2850
@@ -623,8 +621,6 @@ F 3 "~" H 1600 1100 50  0001 C CNN
 	1    1600 1100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1600 1100 1850 1100
 $Comp
 L power:PWR_FLAG #FLG0102
 U 1 1 5E28208C
@@ -946,7 +942,7 @@ Wire Wire Line
 Wire Wire Line
 	3300 1300 3250 1300
 Wire Wire Line
-	3250 1300 3250 900 
+	3250 1300 3250 1100
 Wire Wire Line
 	5100 1300 4900 1300
 Wire Wire Line
@@ -1006,8 +1002,6 @@ $EndComp
 Wire Wire Line
 	1600 1100 1250 1100
 Connection ~ 1600 1100
-Wire Wire Line
-	1250 1200 1400 1200
 Text Label 1400 1200 0    50   ~ 0
 INT
 Wire Wire Line
@@ -1052,6 +1046,134 @@ NoConn ~ 1900 6800
 NoConn ~ 1900 6700
 NoConn ~ 1900 6600
 NoConn ~ 1900 6500
+$Comp
+L Connector:TestPoint TP3
+U 1 1 5F5B6B42
+P 2150 1150
+F 0 "TP3" H 2208 1268 50  0000 L CNN
+F 1 "INT" H 2208 1177 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Loop_D2.54mm_Drill1.5mm_Beaded" H 2350 1150 50  0001 C CNN
+F 3 "~" H 2350 1150 50  0001 C CNN
+	1    2150 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 1200 2150 1150
+Wire Wire Line
+	1250 1200 2150 1200
+Wire Wire Line
+	1800 1100 1800 950 
+Wire Wire Line
+	1800 950  1900 950 
+Wire Wire Line
+	1600 1100 1800 1100
+$Comp
+L Connector:TestPoint TP4
+U 1 1 5F5EF1FA
+P 2800 1200
+F 0 "TP4" H 2858 1318 50  0000 L CNN
+F 1 "XSDN1" H 2858 1227 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Loop_D2.54mm_Drill1.5mm_Beaded" H 3000 1200 50  0001 C CNN
+F 3 "~" H 3000 1200 50  0001 C CNN
+	1    2800 1200
+	1    0    0    -1  
+$EndComp
+Connection ~ 2800 1200
+$Comp
+L Connector:TestPoint TP6
+U 1 1 5F5F4B37
+P 4750 1200
+F 0 "TP6" H 4600 1350 50  0000 L CNN
+F 1 "XSDN2" H 4750 1250 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Loop_D2.54mm_Drill1.5mm_Beaded" H 4950 1200 50  0001 C CNN
+F 3 "~" H 4950 1200 50  0001 C CNN
+	1    4750 1200
+	1    0    0    -1  
+$EndComp
+Connection ~ 4750 1200
+Wire Wire Line
+	4750 1200 5100 1200
+$Comp
+L Connector:TestPoint TP5
+U 1 1 5F613DC0
+P 3250 1100
+F 0 "TP5" V 3445 1172 50  0000 C CNN
+F 1 "INT1" V 3354 1172 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Loop_D2.54mm_Drill1.5mm_Beaded" H 3450 1100 50  0001 C CNN
+F 3 "~" H 3450 1100 50  0001 C CNN
+	1    3250 1100
+	0    -1   -1   0   
+$EndComp
+Connection ~ 3250 1100
+Wire Wire Line
+	3250 900  3250 1100
+$Comp
+L Connector:TestPoint TP7
+U 1 1 5F6395F9
+P 4900 950
+F 0 "TP7" V 5000 1200 50  0000 C CNN
+F 1 "INT2" V 4900 1200 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Loop_D2.54mm_Drill1.5mm_Beaded" H 5100 950 50  0001 C CNN
+F 3 "~" H 5100 950 50  0001 C CNN
+	1    4900 950 
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1250 1800 1400 1800
+Wire Wire Line
+	1250 1900 1400 1900
+Text Label 1400 1800 0    50   ~ 0
+SDA
+Text Label 1400 1900 0    50   ~ 0
+SCL
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5F655D91
+P 1250 1800
+F 0 "TP1" V 1350 2000 50  0000 L CNN
+F 1 "SDA" V 1250 2000 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Loop_D2.54mm_Drill1.5mm_Beaded" H 1450 1800 50  0001 C CNN
+F 3 "~" H 1450 1800 50  0001 C CNN
+	1    1250 1800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 5F65EC8C
+P 1250 1900
+F 0 "TP2" V 1150 2100 50  0000 L CNN
+F 1 "SCL" V 1250 2100 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Loop_D2.54mm_Drill1.5mm_Beaded" H 1450 1900 50  0001 C CNN
+F 3 "~" H 1450 1900 50  0001 C CNN
+	1    1250 1900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5F686B92
+P 8150 4800
+F 0 "D1" H 8143 5017 50  0000 C CNN
+F 1 "POWER" H 8143 4926 50  0000 C CNN
+F 2 "LED_SMD:LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 8150 4800 50  0001 C CNN
+F 3 "~" H 8150 4800 50  0001 C CNN
+	1    8150 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5F69C75D
+P 7850 5050
+F 0 "R2" H 7920 5096 50  0000 L CNN
+F 1 "R" H 7920 5005 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 7780 5050 50  0001 C CNN
+F 3 "~" H 7850 5050 50  0001 C CNN
+	1    7850 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7850 4900 7850 4800
+Wire Wire Line
+	7850 4800 8000 4800
 Wire Bus Line
 	10350 800  10350 6300
 Wire Bus Line
@@ -1066,4 +1188,26 @@ Wire Bus Line
 	2200 2250 2200 5800
 Wire Bus Line
 	2100 5350 2100 7450
+$Comp
+L power:GND #PWR02
+U 1 1 5F6A5149
+P 7850 5200
+F 0 "#PWR02" H 7850 4950 50  0001 C CNN
+F 1 "GND" H 7855 5027 50  0000 C CNN
+F 2 "" H 7850 5200 50  0001 C CNN
+F 3 "" H 7850 5200 50  0001 C CNN
+	1    7850 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR03
+U 1 1 5F6A55B2
+P 8300 4800
+F 0 "#PWR03" H 8300 4650 50  0001 C CNN
+F 1 "+3V3" H 8315 4973 50  0000 C CNN
+F 2 "" H 8300 4800 50  0001 C CNN
+F 3 "" H 8300 4800 50  0001 C CNN
+	1    8300 4800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
