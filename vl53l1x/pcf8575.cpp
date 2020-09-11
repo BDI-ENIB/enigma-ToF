@@ -6,10 +6,10 @@ address{address}
 {}
 
 uint8_t PCF8575::read(uint16_t &value) {
-	TOF_I2C.requestFrom(dev, 2);
+	TOF_I2C.requestFrom(address, 2);
 	uint16_t msb = TOF_I2C.readByte();
 	uint16_t lsb = TOF_I2C.readByte();
-	*value = (msb << 8) | lsb;
+	value = (msb << 8) | lsb;
 
 	return 0;
 }
@@ -24,14 +24,14 @@ uint8_t PCF8575::write(uint16_t value) {
 
 uint8_t PCF8575::get_last_high_index(int &index) {
 	uint16_t value;
-	status = read(value);
+	auto status = read(value);
 
 	if (status)
 		return status;
 
-	*index = -1;
+	index = -1;
 	while (value) {
-		(*index) ++;
+		index++;
 		value = value >> 1;
 	}
 
