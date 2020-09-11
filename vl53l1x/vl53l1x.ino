@@ -24,8 +24,8 @@ void my_setup() {
 	#if SERIAL_DEBUG
 		Serial.println("Initializing sensor");
 	#endif
-	tof1 = new Tof(33, 0, TOF_ADDRESS_1);
-	tof2 = new Tof(34, 0, TOF_ADDRESS_2);
+	tof1 = new Tof(33, TOF_ADDRESS_1);
+	tof2 = new Tof(34, TOF_ADDRESS_2);
 
 	#if SERIAL_DEBUG
 		Serial.println("Starting ranging");

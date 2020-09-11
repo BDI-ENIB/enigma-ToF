@@ -1,8 +1,13 @@
 #include "tof.h"
 #include "params.h"
 
-Tof::Tof(int enable_gpio_id, int interrupt_gpio_id, uint16_t address):
-distance{}, address{address}, enable_id{enable_gpio_id}, interrupt_id{interrupt_gpio_id} 
+#if TOF_GPIO_INTERRUPT
+	Tof::Tof(int enable_gpio_id, int interrupt_gpio_id, uint16_t address):
+	interrupt_id{interrupt_gpio_id},
+#else
+	Tof::Tof(int enable_gpio_id, uint16_t address):
+#endif
+distance{}, address{address}, enable_id{enable_gpio_id}
 {
 	#if SERIAL_DEBUG
 		Serial.print("Initializing sensor at enable ");
@@ -17,7 +22,9 @@ distance{}, address{address}, enable_id{enable_gpio_id}, interrupt_id{interrupt_
 
 void Tof::set_gpio_mode() {
 	pinMode(enable_id, OUTPUT);
-	pinMode(interrupt_id, INPUT);
+	#if TOF_GPIO_INTERRUPT
+		pinMode(interrupt_id, INPUT);
+	#endif
 }
 
 void Tof::init_sensor() {
@@ -84,7 +91,11 @@ uint8_t Tof::try_refresh_distance() {
 
 	uint8_t data_ready = false, status = 3;
 
-	VL53L1X_CheckForDataReady(address, &data_ready);
+	#if TOF_GPIO_INTERRUPT
+		data_ready = ! digitalRead(interrupt_id);
+	#else
+		VL53L1X_CheckForDataReady(address, &data_ready);
+	#endif
 	if (data_ready) {
 		VL53L1X_GetRangeStatus(address, &status);
 		VL53L1X_GetDistance(address, &distance);
